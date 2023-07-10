@@ -29,8 +29,6 @@ for item, preco in itens_mercado.items():
     print(f"- {item} (R${preco:.2f})")
 
 
-
-
 # Loop para escolher os itens
 while True:
 
@@ -84,19 +82,23 @@ match escolha_paga:
     case 3:
         print(f'Você optou por \033[1m\033[4mCredito em parcelas\033[0m e pagara com 10% de acréscimo \033[91mR$ {(valor_total * 10 / 100) + valor_total:.2f}\033[0m')
 
-#######
-resposta = int(input("Deseja escutar uma musica em agradecimento [1]Sim/[2]Não): "))
+# Musica
+while True:
+    resposta = input("Deseja escutar uma musica em agradecimento [S]Sim/[N]Não): ").lower().split()[0]
 
-if resposta == 1:
-    pygame.init()
-    pygame.mixer.music.load('Super-Mario.mp3')
-    pygame.mixer.music.play(loops=0, start=0.0)
-    input()
-    pygame.event.wait()
-elif resposta == 2:
-    print("Volte sempre")
-else:
-    print("Resposta inválida. Por favor, digite [1]Sim - [2]Não.")
+    if resposta == 's':
+        pygame.init()
+        pygame.mixer.music.load('Super-Mario.mp3')
+        pygame.mixer.music.play(loops=0, start=0.0)
+        input()
+        pygame.event.wait()
+    elif resposta == 'n':
+        print("Volte sempre")
+        break
+    else:
+        print("Resposta inválida. Por favor, digite [S]Sim - [N]Não.")
+
+
 
 
 print("=-" * 40)
