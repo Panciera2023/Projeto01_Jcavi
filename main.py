@@ -2,9 +2,9 @@ import time
 import pygame
 from unidecode import unidecode
 from time import sleep
-
-
 from unidecode import unidecode
+
+
 print("=-" * 40)
 print('\033[91m                 ======= Mercado Jcavi Delivery =========\033[0m'.center(50))
 print("=-" * 40)
@@ -85,12 +85,18 @@ match escolha_paga:
         print(f'Você optou por \033[1m\033[4mCredito em parcelas\033[0m e pagara com 10% de acréscimo \033[91mR$ {(valor_total * 10 / 100) + valor_total:.2f}\033[0m')
 
 #######
+resposta = int(input("Deseja escutar uma musica em agradecimento [1]Sim/[2]Não): "))
 
-pygame.init()
-pygame.mixer.music.load('Super-Mario.mp3')
-pygame.mixer.music.play(loops=0, start=0.0)
-input()
-pygame.event.wait()
+if resposta == 1:
+    pygame.init()
+    pygame.mixer.music.load('Super-Mario.mp3')
+    pygame.mixer.music.play(loops=0, start=0.0)
+    input()
+    pygame.event.wait()
+elif resposta == 2:
+    print("Volte sempre")
+else:
+    print("Resposta inválida. Por favor, digite [1]Sim - [2]Não.")
 
 
 print("=-" * 40)
