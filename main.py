@@ -32,7 +32,7 @@ for item, preco in itens_mercado.items():
 # Loop para escolher os itens
 while True:
 
-    escolha = input("Digite o nome do item que deseja adicionar (ou 'sair' para encerrar): ").lower()
+    escolha = input("Digite o nome do item que deseja adicionar (ou 'sair' para encerrar): ").lower().strip()
 
     if escolha == 'sair':
         break
@@ -84,7 +84,7 @@ match escolha_paga:
 
 # Musica
 while True:
-    resposta = input("Deseja escutar uma musica em agradecimento [S]Sim/[N]Não): ").lower().split()[0]
+    resposta = input("Deseja escutar uma musica em agradecimento [S]Sim/[N]Não): ").lower().strip()[0]
 
     if resposta == 's':
         pygame.init()
