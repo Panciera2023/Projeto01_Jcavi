@@ -3,6 +3,7 @@ import pygame
 from unidecode import unidecode
 from time import sleep
 from unidecode import unidecode
+import csv
 
 
 print("=-" * 40)
@@ -72,37 +73,47 @@ print('Como você deseja pagar por seus itens, escolha abaixo')
 print('''[1] Dinheiro / Debito (5% Desconto)
 [2] Cartão Credito (5% Acréscimo)
 [3] Cartão Credito em mais de 2x (10% Acréscimo)''')
-escolha_paga = int(input('Digite sua opção: '))
 
-match escolha_paga:
-    case 1:
-        print(f'Você optou por \033[1m\033[4mAvista\033[0m e recebera 5% de desconto \033[91mR$ {valor_total - (valor_total * 5 / 100):.2f}\033[0m')
-    case 2:
-        print(f'Você optou por \033[1m\033[4mCredito a Vista\033[0m pagara com 5% de acréscimo \033[91mR$ {(valor_total * 5 / 100) + valor_total:.2f}\033[0m')
-    case 3:
-        print(f'Você optou por \033[1m\033[4mCredito em parcelas\033[0m e pagara com 10% de acréscimo \033[91mR$ {(valor_total * 10 / 100) + valor_total:.2f}\033[0m')
-
-# Musica
 while True:
-    resposta = input("Deseja escutar uma musica em agradecimento [S]Sim/[N]Não): ").lower().strip()[0]
-
-    if resposta == 's':
-        pygame.init()
-        pygame.mixer.music.load('Super-Mario.mp3')
-        pygame.mixer.music.play(loops=0, start=0.0)
-        input()
-        pygame.event.wait()
-    elif resposta == 'n':
-        print("Volte sempre")
-        break
-    else:
-        print("Resposta inválida. Por favor, digite [S]Sim - [N]Não.")
-
-
+    escolha_paga = input('Digite sua opção: ').lower().strip()
+    match escolha_paga:
+        case '1':
+            print(f'Você optou por \033[1m\033[4mAvista\033[0m e recebera 5% de desconto \033[91mR$ {valor_total - (valor_total * 5 / 100):.2f}\033[0m')
+            break
+        case '2':
+            print(f'Você optou por \033[1m\033[4mCredito a Vista\033[0m pagara com 5% de acréscimo \033[91mR$ {(valor_total * 5 / 100) + valor_total:.2f}\033[0m')
+            break
+        case '3':
+            print(f'Você optou por \033[1m\033[4mCredito em parcelas\033[0m e pagara com 10% de acréscimo \033[91mR$ {(valor_total * 10 / 100) + valor_total:.2f}\033[0m')
+            break
+        case _:
+            print("Resposta inválida. Por favor, tente novamente")
 
 
 print("=-" * 40)
 print('\033[91m                 ======= Agradecemos a Preferência =========\033[0m'.center(50))
 print("=-" * 40)
 
+# Exportar para CSV
+with open('carrinho.csv', 'w', newline='') as arquivo_csv:
+    writer = csv.writer(arquivo_csv)
+    for item in carrinho:
+        writer.writerow([item])
 
+
+
+# Musica
+while True:
+    resposta = input("Deseja escutar uma musica em agradecimento [S]Sim/[N]Não): ").lower().strip()[0]
+    match resposta:
+        case 's':
+            pygame.init()
+            pygame.mixer.music.load('Super-Mario.mp3')
+            pygame.mixer.music.play(loops=0, start=0.0)
+            input()
+            pygame.event.wait()
+        case 'n':
+            print("Volte sempre")
+            break
+        case _:
+            print("Resposta inválida. Por favor, digite [S]Sim - [N]Não.")
