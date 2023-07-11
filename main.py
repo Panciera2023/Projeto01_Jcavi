@@ -1,9 +1,8 @@
 import time
 import pygame
 from unidecode import unidecode
-from time import sleep
-from unidecode import unidecode
 import csv
+from Bd_mercado import mercado
 
 
 print("=-" * 40)
@@ -11,14 +10,6 @@ print('\033[91m                 ======= Mercado Jcavi Delivery =========\033[0m'
 print("=-" * 40)
 
 
-# Dicionário com os itens e seus respectivos preços
-itens_mercado = {
-    'Banana': 2.5,
-    'Maçã': 3.0,
-    'Laranja': 2.0,
-    'Cenoura': 1.5,
-    'Batata': 2.0
-}
 
 carrinho = []  # Lista para armazenar os itens escolhidos
 
@@ -26,7 +17,7 @@ print("Bem-vindo ao mercado!")
 print("Aqui estão as opções de itens disponíveis:")
 
 # Mostrar as opções de itens
-for item, preco in itens_mercado.items():
+for item, preco in mercado.items():
     print(f"- {item} (R${preco:.2f})")
 
 
@@ -43,7 +34,7 @@ while True:
 
     # Verificar se a escolha corresponde a um item do dicionário
     item_encontrado = False
-    for item in itens_mercado.keys():
+    for item in mercado.keys():
         item_sem_acento = unidecode(item.lower())
         if escolha_sem_acento == item_sem_acento:
             carrinho.append(item)
@@ -59,7 +50,7 @@ for item in carrinho:
     print(f"- {item.capitalize()}")
 
 # Calcular o valor total
-valor_total = sum(itens_mercado[item] for item in carrinho)
+valor_total = sum(mercado[item] for item in carrinho)
 
 # Imprimir o valor total
 print('\033[32mAguarde calculando...\033[0m')
